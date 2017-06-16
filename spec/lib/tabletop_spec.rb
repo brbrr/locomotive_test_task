@@ -23,6 +23,20 @@ module ToyRobot
         expect(@table_top.toy.position).to eq x: 4, y: 2
         expect(@table_top.toy.direction.to_h).to eq DIRECTIONS[:WEST].to_h
       end
+
+      it 'do nothing if possition is invalid' do
+        @table_top.place('NORTH', x: 6, y: 3)
+        expect(@table_top.toy).to be nil
+
+        @table_top.place('NORTH', x: 3, y: 6)
+        expect(@table_top.toy).to be nil
+
+        @table_top.place('NORTH', x: 3, y: -1)
+        expect(@table_top.toy).to be nil
+
+        @table_top.place('NORTH', x: -1, y: 4)
+        expect(@table_top.toy).to be nil
+      end
     end
 
     context '#move' do
@@ -96,7 +110,16 @@ module ToyRobot
     end
 
     context '#report' do
-      
+      it 'does nothing if not placed' do
+        expect(@table_top.report).to eq nil
+      end
+
+      it 'displaying toys direction and position' do
+        @table_top.place('NORTH', x: 1, y: 3)
+        expect do
+          @table_top.report
+        end.to output("At {:x=>1, :y=>3}, facing NORTH\n").to_stdout
+      end
     end
   end
 end

@@ -6,7 +6,7 @@ module ToyRobot
     end
 
     def place(direction, position)
-      # TODO: Validate placing position
+      return if invalid_position?(position)
       @toy = Toy.new(direction, position)
     end
 
@@ -15,9 +15,13 @@ module ToyRobot
 
       x = @toy.position[:x] + @toy.direction.x
       y = @toy.position[:y] + @toy.direction.y
-      return if (x > @dimentions[:x] || x < 0) || (y > @dimentions[:y] || y < 0)
+      return if invalid_position?(x: x, y: y)
 
       @toy.move
+    end
+
+    def invalid_position?(x: x, y: y)
+      (x > @dimentions[:x] || x < 0) || (y > @dimentions[:y] || y < 0)
     end
 
     def left
@@ -32,11 +36,8 @@ module ToyRobot
 
     def report
       return unless @toy
-      direction = DIRECTIONS.select { |_k,v| v.x == q.x && v.y == q.y }.keys[0]
+      direction = DIRECTIONS.select { |_k, v| v.x == @toy.direction.x && v.y == @toy.direction.y }.keys[0]
       puts "At #{@toy.position}, facing #{direction}"
     end
-
-
-    
   end
 end
