@@ -20,5 +20,9 @@ module ToyRobot
       @x = x.round
       @y = y.round
     end
+
+    def to_h
+      { x: @x, y: @y }
+    end
   end
 end

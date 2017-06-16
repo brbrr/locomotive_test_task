@@ -1,6 +1,7 @@
 require 'toy_robot/version'
 require 'toy_robot/vector'
 require 'toy_robot/toy'
+require 'toy_robot/tabletop'
 
 module ToyRobot
   # Your code goes here...
@@ -14,11 +15,4 @@ module ToyRobot
 
   # TODO: get rid off global constants
   ROTATION = { LEFT: 1, RIGHT: -1 }.freeze
-
-
-  class TableTop
-  def initialize(toy)
-      @toy = toy
-  end
-end
 end
