@@ -12,6 +12,7 @@ module ToyRobot
       EAST:  Vector.new(1, 0)
   }.freeze
 
+  # TODO: get rid off global constants
   ROTATION = { LEFT: 1, RIGHT: -1 }.freeze
 
 

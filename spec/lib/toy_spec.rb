@@ -40,5 +40,23 @@ module ToyRobot
         expect(toy.position[:x]).to eq @start_pos[:x] + 1
       end
     end
+
+    context 'can rotate' do
+      before :each do
+        @toy = Toy.new('NORTH', x: 5, y: 5)
+      end
+
+      it 'left' do
+        @toy.rotate('LEFT')
+        expect(@toy.direction.x).to eq(-1)
+        expect(@toy.direction.y).to eq(0)
+      end
+
+      it 'right' do
+        @toy.rotate('RIGHT')
+        expect(@toy.direction.x).to eq(1)
+        expect(@toy.direction.y).to eq(0)
+      end
+    end
   end
 end
