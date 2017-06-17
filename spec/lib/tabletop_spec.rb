@@ -118,7 +118,7 @@ module ToyRobot
         @table_top.place('NORTH', x: 1, y: 3)
         expect do
           @table_top.report
-        end.to output("At {:x=>1, :y=>3}, facing NORTH\n").to_stdout
+        end.to output("1,3,NORTH\n").to_stdout
       end
     end
   end

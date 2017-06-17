@@ -20,8 +20,8 @@ module ToyRobot
       @toy.move
     end
 
-    def invalid_position?(x: x, y: y)
-      (x > @dimentions[:x] || x < 0) || (y > @dimentions[:y] || y < 0)
+    def invalid_position?(cords)
+      (cords[:x] > @dimentions[:x] || cords[:x] < 0) || (cords[:y] > @dimentions[:y] || cords[:y] < 0)
     end
 
     def left
@@ -36,8 +36,10 @@ module ToyRobot
 
     def report
       return unless @toy
-      direction = DIRECTIONS.select { |_k, v| v.x == @toy.direction.x && v.y == @toy.direction.y }.keys[0]
-      puts "At #{@toy.position}, facing #{direction}"
+      direction = DIRECTIONS.select do |_k, vect|
+        vect.x == @toy.direction.x && vect.y == @toy.direction.y
+      end.keys[0]
+      puts "#{@toy.position[:x]},#{@toy.position[:y]},#{direction}"
     end
   end
 end
