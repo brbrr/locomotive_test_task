@@ -5,6 +5,16 @@ module ToyRobot
       @dimentions = { x: 5, y: 5 }
     end
 
+    def call(action)
+      splited = action.split(/[,\s]/)
+      method = splited[0].downcase
+      return send(method) if splited[1].nil?
+
+      direction = splited[3]
+      position = { x: splited[1].to_i, y: splited[2].to_i }
+      send(method, direction, position)
+    end
+
     def place(direction, position)
       return if invalid_position?(position)
       @toy = Toy.new(direction, position)
