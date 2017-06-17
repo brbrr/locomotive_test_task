@@ -1,3 +1,8 @@
+What might be improved:
+- switch to some Position objects instead of hashes
+- SRP for InputReader
+- TableTop is not a correct name of the class. ToyDriver? (or even go for command DP instead)
+
 # Toy Robot Simulator
 
 ### Description:
