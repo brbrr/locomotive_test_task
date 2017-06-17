@@ -5,6 +5,7 @@ module ToyRobot
       @dimentions = { x: 5, y: 5 }
     end
 
+    # NOTE: Expected only valid actions
     def call(action)
       splited = action.split(/[,\s]/)
       method = splited[0].downcase

@@ -50,4 +50,17 @@ RSpec.describe ToyRobot do
       ToyRobot.run(actions)
     end.to output("2,2,NORTH\n").to_stdout
   end
+
+  it 'can run from file' do
+    expect do
+      ToyRobot.run_from_file('spec/support/actions.txt')
+    end.to output("2,3,SOUTH\n2,3,NORTH\n0,3,WEST\n").to_stdout
+  end
+
+  it 'can run from STDIN' do
+    allow(STDIN).to receive(:gets).and_return('PLACE 3,3,WEST', 'MOVE', 'LEFT', 'REPORT', "\n")
+    expect do
+      ToyRobot.run_from_stdin
+    end.to output("2,3,SOUTH\n").to_stdout
+  end
 end

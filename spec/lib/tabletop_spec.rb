@@ -121,5 +121,18 @@ module ToyRobot
         end.to output("1,3,NORTH\n").to_stdout
       end
     end
+
+    context '#call' do
+      actions = { place: 'PLACE 0,0,NORTH',
+                  left: 'LEFT',
+                  right: 'RIGHT',
+                  report: 'REPORT' }
+      actions.each do |action, string|
+        it "with #{string} calls correct method" do
+          expect(@table_top).to receive(action)
+          @table_top.call(string)
+        end
+      end
+    end
   end
 end
