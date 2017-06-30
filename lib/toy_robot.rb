@@ -5,10 +5,10 @@ require 'toy_robot/toy'
 require 'toy_robot/toy_driver'
 
 module ToyRobot
-  def self.run(actions)
+  def self.run(actions, parser = InputParser)
     @tabletop = ToyDriver.new
     actions.each do |action|
-      @tabletop.call(InputParser.parse(action))
+      @tabletop.call(parser.parse(action))
     end
   end
 

@@ -1,19 +1,21 @@
 module ToyRobot
   class ToyDriver
     attr_accessor :field_size, :toy
-    def initialize
-      @field_size = [5, 5]
+    def initialize(field_size = [5, 5], toy_class = Toy)
+      @field_size = field_size
+      @toy_class = toy_class
     end
 
     # NOTE: Expected only valid actions
-    def call(actions_arry)
-      return send(actions_arry[0]) if actions_arry[1].nil?
-      send(actions_arry[0], actions_arry[1], actions_arry[2])
+    def call(action_arry)
+      method, direction, position = action_arry
+      return send(method) if direction.nil?
+      send(method, direction, position)
     end
 
     def place(direction, position)
       return if invalid_position?(position)
-      @toy = Toy.new(direction, position)
+      @toy = @toy_class.new(direction, position)
     end
 
     def move
