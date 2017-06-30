@@ -34,7 +34,7 @@ module ToyRobot
 
     def direction_name
       DIRECTIONS.select do |_k, cords|
-        cords[0] == @toy.direction[0] && cords[0] == @toy.direction[1]
+        cords == @direction
       end.keys[0]
     end
   end

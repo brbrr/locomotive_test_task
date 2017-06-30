@@ -12,29 +12,29 @@ module ToyRobot
 
     context '#place' do
       it 'creates new toy' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
-        expect(@toy_driver.toy.position).to eq x: 1, y: 3
-        expect(@toy_driver.toy.direction.to_h).to eq DIRECTIONS[:NORTH].to_h
+        @toy_driver.place('NORTH', [1, 3])
+        expect(@toy_driver.toy.position).to eq [1, 3]
+        expect(@toy_driver.toy.direction).to eq [0, 1]
       end
 
       it 'replaces new toy' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
-        @toy_driver.place('WEST', x: 4, y: 2)
-        expect(@toy_driver.toy.position).to eq x: 4, y: 2
-        expect(@toy_driver.toy.direction.to_h).to eq DIRECTIONS[:WEST].to_h
+        @toy_driver.place('NORTH', [1, 3])
+        @toy_driver.place('WEST', [4, 2])
+        expect(@toy_driver.toy.position).to eq [4, 2]
+        expect(@toy_driver.toy.direction).to eq [-1, 0]
       end
 
       it 'do nothing if possition is invalid' do
-        @toy_driver.place('NORTH', x: 6, y: 3)
+        @toy_driver.place('NORTH', [6, 3])
         expect(@toy_driver.toy).to be nil
 
-        @toy_driver.place('NORTH', x: 3, y: 6)
+        @toy_driver.place('NORTH', [3, 6])
         expect(@toy_driver.toy).to be nil
 
-        @toy_driver.place('NORTH', x: 3, y: -1)
+        @toy_driver.place('NORTH', [3, -1])
         expect(@toy_driver.toy).to be nil
 
-        @toy_driver.place('NORTH', x: -1, y: 4)
+        @toy_driver.place('NORTH', [-1, 4])
         expect(@toy_driver.toy).to be nil
       end
     end
@@ -45,14 +45,14 @@ module ToyRobot
       end
 
       it 'update toys position' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
+        @toy_driver.place('NORTH', [1, 3])
         @toy_driver.move
-        expect(@toy_driver.toy.position).to eq(x: 1, y: 4)
+        expect(@toy_driver.toy.position).to eq([1, 4])
       end
 
       context 'do nothing if moving out of bounds' do
         it 'to North' do
-          pos = { x: 3, y: 5 }
+          pos = [3, 5]
           @toy_driver.place('NORTH', pos)
           @toy_driver.move
 
@@ -60,7 +60,7 @@ module ToyRobot
         end
 
         it 'to South' do
-          pos = { x: 3, y: 0 }
+          pos = [3, 0]
           @toy_driver.place('SOUTH', pos)
           @toy_driver.move
 
@@ -68,7 +68,7 @@ module ToyRobot
         end
 
         it 'to West' do
-          pos = { x: 0, y: 3 }
+          pos = [0, 3]
           @toy_driver.place('WEST', pos)
           @toy_driver.move
 
@@ -76,7 +76,7 @@ module ToyRobot
         end
 
         it 'to East' do
-          pos = { x: 5, y: 3 }
+          pos = [5, 3]
           @toy_driver.place('EAST', pos)
           @toy_driver.move
 
@@ -91,9 +91,9 @@ module ToyRobot
       end
 
       it 'updates toy direction' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
+        @toy_driver.place('NORTH', [1, 3])
         @toy_driver.left
-        expect(@toy_driver.toy.direction.to_h).to eq DIRECTIONS[:WEST].to_h
+        expect(@toy_driver.toy.direction).to eq [-1, 0]
       end
     end
 
@@ -103,9 +103,9 @@ module ToyRobot
       end
 
       it 'updates toy direction' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
+        @toy_driver.place('NORTH', [1, 3])
         @toy_driver.right
-        expect(@toy_driver.toy.direction.to_h).to eq DIRECTIONS[:EAST].to_h
+        expect(@toy_driver.toy.direction).to eq [1, 0]
       end
     end
 
@@ -115,7 +115,7 @@ module ToyRobot
       end
 
       it 'displaying toys direction and position' do
-        @toy_driver.place('NORTH', x: 1, y: 3)
+        @toy_driver.place('NORTH', [1, 3])
         expect do
           @toy_driver.report
         end.to output("1,3,NORTH\n").to_stdout

@@ -1,8 +1,8 @@
 module ToyRobot
   class ToyDriver
-    attr_accessor :dimentions, :toy
+    attr_accessor :field_size, :toy
     def initialize
-      @dimentions = [5, 5]
+      @field_size = [5, 5]
     end
 
     # NOTE: Expected only valid actions
@@ -24,15 +24,15 @@ module ToyRobot
     def move
       return unless @toy
 
-      x = @toy.position[0] + @toy.direction.x
-      y = @toy.position[1] + @toy.direction.y
-      return if invalid_position?(x: x, y: y)
+      x = @toy.position[0] + @toy.direction[0]
+      y = @toy.position[1] + @toy.direction[1]
+      return if invalid_position?([x, y])
 
       @toy.move
     end
 
     def invalid_position?(cords)
-      (cords[0] > @dimentions[0] || cords[0] < 0) || (cords[1] > @dimentions[1] || cords[1] < 0)
+      (cords[0] > @field_size[0] || cords[0] < 0) || (cords[1] > @field_size[1] || cords[1] < 0)
     end
 
     def left
