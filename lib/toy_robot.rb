@@ -2,27 +2,11 @@ require 'toy_robot/version'
 require 'toy_robot/input_reader'
 require 'toy_robot/vector'
 require 'toy_robot/toy'
-require 'toy_robot/tabletop'
+require 'toy_robot/toy_driver'
 
 module ToyRobot
-  # TODO: get rid off global constants
-  DIRECTIONS2 = {
-    NORTH: Vector.new(0, 1),
-    SOUTH: Vector.new(0, -1),
-    WEST:  Vector.new(-1, 0),
-    EAST:  Vector.new(1, 0)
-  }.freeze
-
-  DIRECTIONS = {
-    NORTH: [0, 1],
-    EAST:  [1, 0],
-    SOUTH: [0, -1],
-    WEST:  [-1, 0]
-  }.freeze
-
-
   def self.run(actions)
-    @tabletop = TableTop.new
+    @tabletop = ToyDriver.new
     actions.each do |action|
       @tabletop.call(action)
     end

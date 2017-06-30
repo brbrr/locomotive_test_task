@@ -1,8 +1,8 @@
 module ToyRobot
-  class TableTop
+  class ToyDriver
     attr_accessor :dimentions, :toy
     def initialize
-      @dimentions = { x: 5, y: 5 }
+      @dimentions = [5, 5]
     end
 
     # NOTE: Expected only valid actions
@@ -12,7 +12,7 @@ module ToyRobot
       return send(method) if splited[1].nil?
 
       direction = splited[3]
-      position = { x: splited[1].to_i, y: splited[2].to_i }
+      position = [splited[1].to_i, splited[2].to_i]
       send(method, direction, position)
     end
 
@@ -24,33 +24,31 @@ module ToyRobot
     def move
       return unless @toy
 
-      x = @toy.position[:x] + @toy.direction.x
-      y = @toy.position[:y] + @toy.direction.y
+      x = @toy.position[0] + @toy.direction.x
+      y = @toy.position[1] + @toy.direction.y
       return if invalid_position?(x: x, y: y)
 
       @toy.move
     end
 
     def invalid_position?(cords)
-      (cords[:x] > @dimentions[:x] || cords[:x] < 0) || (cords[:y] > @dimentions[:y] || cords[:y] < 0)
+      (cords[0] > @dimentions[0] || cords[0] < 0) || (cords[1] > @dimentions[1] || cords[1] < 0)
     end
 
     def left
       return unless @toy
-      @toy.rotate 'LEFT'
+      @toy.rotate :LEFT
     end
 
     def right
       return unless @toy
-      @toy.rotate 'RIGHT'
+      @toy.rotate :RIGHT
     end
 
     def report
       return unless @toy
-      direction = DIRECTIONS.select do |_k, vect|
-        vect.x == @toy.direction.x && vect.y == @toy.direction.y
-      end.keys[0]
-      puts "#{@toy.position[:x]},#{@toy.position[:y]},#{direction}"
+      direction = @toy.direction_name
+      puts "#{@toy.position[0]},#{@toy.position[1]},#{direction}"
     end
   end
 end
