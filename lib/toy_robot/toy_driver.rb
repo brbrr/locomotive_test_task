@@ -17,13 +17,12 @@ module ToyRobot
     end
 
     def move
-      return unless @toy
+      return unless valid_action?
 
       x = @toy.position[0] + @toy.direction[0]
       y = @toy.position[1] + @toy.direction[1]
-      return if invalid_position?([x, y])
 
-      @toy.move
+      @toy.update_position([x, y]) unless invalid_position?([x, y])
     end
 
     def invalid_position?(cords)
@@ -31,19 +30,23 @@ module ToyRobot
     end
 
     def left
-      return unless @toy
+      return unless valid_action?
       @toy.rotate :LEFT
     end
 
     def right
-      return unless @toy
+      return unless valid_action?
       @toy.rotate :RIGHT
     end
 
     def report
-      return unless @toy
+      return unless valid_action?
       direction = @toy.direction_name
       puts "#{@toy.position[0]},#{@toy.position[1]},#{direction}"
+    end
+
+    def valid_action?
+      @toy ? true : false
     end
   end
 end

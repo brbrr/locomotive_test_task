@@ -11,17 +11,13 @@ module ToyRobot
 
     ROTATION = { LEFT: -1, RIGHT: 1 }.freeze
 
-
     def initialize(direction, position)
-      # @direction = DIRECTIONS[direction.to_sym].dup
       @direction = DIRECTIONS.fetch(direction.to_sym)
       @position = position.dup
     end
 
-    def move
-      # @position = @position.merge!(dir) { |_, old_val, new_val| old_val + new_val }
-      @position[0] += @direction[0]
-      @position[1] += @direction[1]
+    def update_position(new_position)
+      @position = new_position
     end
 
     def rotate(to)

@@ -44,10 +44,34 @@ module ToyRobot
         expect(@toy_driver.move).to eq nil
       end
 
-      it 'update toys position' do
-        @toy_driver.place('NORTH', [1, 3])
-        @toy_driver.move
-        expect(@toy_driver.toy.position).to eq([1, 4])
+      context 'update toy position' do
+        it 'in NORTH direction' do
+          @toy_driver.place('NORTH', [1, 3])
+          @toy_driver.move
+
+          expect(@toy_driver.toy.position).to eq([1, 4])
+        end
+
+        it 'in SOUTH direction' do
+          @toy_driver.place('SOUTH', [2, 3])
+          @toy_driver.move
+
+          expect(@toy_driver.toy.position).to eq([2, 2])
+        end
+
+        it 'in WEST drection' do
+          @toy_driver.place('WEST', [2, 3])
+          @toy_driver.move
+
+          expect(@toy_driver.toy.position).to eq([1, 3])
+        end
+
+        it 'in EAST direction' do
+          @toy_driver.place('EAST', [1, 3])
+          @toy_driver.move
+
+          expect(@toy_driver.toy.position).to eq([2, 3])
+        end
       end
 
       context 'do nothing if moving out of bounds' do
