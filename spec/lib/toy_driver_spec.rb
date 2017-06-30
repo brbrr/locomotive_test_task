@@ -123,10 +123,10 @@ module ToyRobot
     end
 
     context '#call' do
-      actions = { place: 'PLACE 0,0,NORTH',
-                  left: 'LEFT',
-                  right: 'RIGHT',
-                  report: 'REPORT' }
+      actions = { place: [:place, :NORTH, [0, 0]],
+                  left: [:left],
+                  right: [:right],
+                  report: [:report] }
       actions.each do |action, string|
         it "with #{string} calls correct method" do
           expect(@toy_driver).to receive(action)

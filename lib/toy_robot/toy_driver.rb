@@ -6,14 +6,9 @@ module ToyRobot
     end
 
     # NOTE: Expected only valid actions
-    def call(action)
-      splited = action.split(/[,\s]/)
-      method = splited[0].downcase
-      return send(method) if splited[1].nil?
-
-      direction = splited[3]
-      position = [splited[1].to_i, splited[2].to_i]
-      send(method, direction, position)
+    def call(actions_arry)
+      return send(actions_arry[0]) if actions_arry[1].nil?
+      send(actions_arry[0], actions_arry[1], actions_arry[2])
     end
 
     def place(direction, position)
