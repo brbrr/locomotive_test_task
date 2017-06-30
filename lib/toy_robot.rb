@@ -6,14 +6,19 @@ require 'toy_robot/tabletop'
 
 module ToyRobot
   # TODO: get rid off global constants
-  DIRECTIONS = {
+  DIRECTIONS2 = {
     NORTH: Vector.new(0, 1),
     SOUTH: Vector.new(0, -1),
     WEST:  Vector.new(-1, 0),
     EAST:  Vector.new(1, 0)
   }.freeze
 
-  ROTATION = { LEFT: 1, RIGHT: -1 }.freeze
+  DIRECTIONS = {
+    NORTH: [0, 1],
+    EAST:  [1, 0],
+    SOUTH: [0, -1],
+    WEST:  [-1, 0]
+  }.freeze
 
 
   def self.run(actions)
@@ -24,10 +29,10 @@ module ToyRobot
   end
 
   def self.run_from_file(path)
-    self.run InputReader.from_file(path)
+    run InputReader.from_file(path)
   end
 
   def self.run_from_stdin
-    self.run InputReader.from_stdin
+    run InputReader.from_stdin
   end
 end
