@@ -6,7 +6,7 @@ module ToyRobot
       @toy_class = toy_class
     end
 
-    # NOTE: Expected only valid actions
+    # NOTE: Accepts parsed and valid array of action + params
     def call(action_arry)
       method, direction, position = action_arry
       return send(method) if direction.nil?

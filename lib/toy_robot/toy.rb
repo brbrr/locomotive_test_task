@@ -1,6 +1,6 @@
 module ToyRobot
   class Toy
-    attr_accessor :position, :direction
+    attr_accessor :position, :direction, :direction_name
 
     DIRECTIONS = {
       NORTH: [0, 1],
@@ -13,6 +13,7 @@ module ToyRobot
 
     def initialize(direction, position)
       @direction = DIRECTIONS.fetch(direction.to_sym)
+      @direction_name = direction.to_sym
       @position = position.dup
     end
 
@@ -26,12 +27,7 @@ module ToyRobot
       new_id = 0 if new_id > 3
       new_id = 3 if new_id < 0
       @direction = DIRECTIONS.values[new_id]
-    end
-
-    def direction_name
-      DIRECTIONS.select do |_k, cords|
-        cords == @direction
-      end.keys[0]
+      @direction_name = DIRECTIONS.keys[new_id]
     end
   end
 end
