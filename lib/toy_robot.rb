@@ -4,9 +4,15 @@ require 'toy_robot/input_parser'
 require 'toy_robot/toy'
 require 'toy_robot/toy_driver'
 
+  # TODO: Remove coupling from #run_from_*, replace with DI?
+  # Wrap below methods with Class
+
 module ToyRobot
   def self.run(actions, parser = InputParser)
     @tabletop = ToyDriver.new
+    # Refactor InputParser to use instanse methods
+    # then just reuse single instance.
+    # parser = InputParser.new
     actions.each do |action|
       @tabletop.call(parser.parse(action))
     end

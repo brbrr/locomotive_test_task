@@ -25,6 +25,9 @@ module ToyRobot
       end
 
       it 'do nothing if possition is invalid' do
+        @toy_driver.place('NORTH', [5, 5])
+        expect(@toy_driver.toy).to be nil
+
         @toy_driver.place('NORTH', [6, 3])
         expect(@toy_driver.toy).to be nil
 
