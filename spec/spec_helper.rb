@@ -1,8 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'bundler/setup'
 require 'toy_robot'
+# require "bundler/setup"
 require 'pry'
 
 RSpec.configure do |config|

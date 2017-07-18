@@ -1,7 +1,7 @@
 module ToyRobot
   class ToyDriver
     attr_accessor :field_size, :toy
-    def initialize(field_size = [5, 5], toy_class = Toy)
+    def initialize(field_size = [4, 4], toy_class = Toy)
       @field_size = field_size
       @toy_class = toy_class
     end

@@ -79,7 +79,7 @@ module ToyRobot
 
       context 'do nothing if moving out of bounds' do
         it 'to North' do
-          pos = [3, 5]
+          pos = [3, 4]
           @toy_driver.place('NORTH', pos)
           @toy_driver.move
 
@@ -103,7 +103,7 @@ module ToyRobot
         end
 
         it 'to East' do
-          pos = [5, 3]
+          pos = [4, 3]
           @toy_driver.place('EAST', pos)
           @toy_driver.move
 
