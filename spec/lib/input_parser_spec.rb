@@ -17,5 +17,18 @@ module ToyRobot
     it "parses 'REPORT'" do
       expect(InputParser.parse('REPORT')).to eq [:report]
     end
+
+    it "parses 'REPORT'" do
+      # expect(InputParser.parse('REPORT')).to eq [:report]
+      actions = ['PLACE 4,4,NORTH',
+'PLACE 2,1,EAST',
+'PLACE ,WAT',
+'PLACE ,,',
+'PLACE ,',
+'PLACE']
+      actions.each do |a|
+        InputParser.parse a
+      end
+    end
   end
 end

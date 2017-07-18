@@ -14,6 +14,20 @@ RSpec.describe ToyRobot do
     end.to output("0,1,NORTH\n").to_stdout
   end
 
+  it 'manipulates the toy with move' do
+    actions = ['PLACE 4,4,NORTH',
+'PLACE 2,1,EAST',
+'PLACE ,WAT',
+'PLACE ,,',
+'PLACE ,',
+'PLACE']
+    expect do
+      ToyRobot.run(actions)
+    end.to output("0,1,NORTH\n").to_stdout
+  end
+
+  
+
   it 'manipulates the toy with rotation' do
     actions = ['PLACE 0,0,NORTH',
                'LEFT',
