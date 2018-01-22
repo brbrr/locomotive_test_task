@@ -5,11 +5,6 @@ module ToyRobot
   class InputParser
     def self.parse(raw_action)
       result = []
-      # Splitting action by space or comma(,)
-      # splited = raw_action.split(/[,\s]/)
-      # result << splited[0].downcase.to_sym
-      # return result if splited[1].nil?
-
       splited = raw_action.split(' ')
       result << splited[0].downcase.to_sym
       return result if splited[1].nil?
@@ -25,7 +20,7 @@ module ToyRobot
       act_arry.size == 3 &&
         Integer(act_arry[0]) &&
         Integer(act_arry[1]) &&
-        ['NORTH', 'EAST', 'WEST', 'SOUTH'].include?(act_arry[2])
+        %w[NORTH EAST WEST SOUTH].include?(act_arry[2])
     end
 
     def parse(raw_action)
