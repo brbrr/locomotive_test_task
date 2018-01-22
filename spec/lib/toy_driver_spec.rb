@@ -25,6 +25,9 @@ module ToyRobot
       end
 
       it 'do nothing if possition is invalid' do
+        @toy_driver.place('NORTH', [5, 5])
+        expect(@toy_driver.toy).to be nil
+
         @toy_driver.place('NORTH', [6, 3])
         expect(@toy_driver.toy).to be nil
 
@@ -76,7 +79,7 @@ module ToyRobot
 
       context 'do nothing if moving out of bounds' do
         it 'to North' do
-          pos = [3, 5]
+          pos = [3, 4]
           @toy_driver.place('NORTH', pos)
           @toy_driver.move
 
@@ -100,7 +103,7 @@ module ToyRobot
         end
 
         it 'to East' do
-          pos = [5, 3]
+          pos = [4, 3]
           @toy_driver.place('EAST', pos)
           @toy_driver.move
 
