@@ -1,16 +1,31 @@
 module ToyRobot
+  class NotValidAction < RuntimeError
+  end
+
   class InputParser
     def self.parse(raw_action)
       result = []
       # Splitting action by space or comma(,)
-      splited = raw_action.split(/[,\s]/)
+      # splited = raw_action.split(/[,\s]/)
+      # result << splited[0].downcase.to_sym
+      # return result if splited[1].nil?
+
+      splited = raw_action.split(' ')
       result << splited[0].downcase.to_sym
       return result if splited[1].nil?
 
-      raise 'NotValidAction' unless valid? splited
+      directions = splited[1].split(',')
+      raise NotValidAction, splited unless valid? directions
 
-      result << splited[3].to_sym # direction
-      result << [splited[1].to_i, splited[2].to_i] # position
+      result << directions[2].to_sym # direction
+      result << [directions[0].to_i, directions[1].to_i] # position
+    end
+
+    def self.valid?(act_arry)
+      act_arry.size == 3 &&
+        Integer(act_arry[0]) &&
+        Integer(act_arry[1]) &&
+        ['NORTH', 'EAST', 'WEST', 'SOUTH'].include?(act_arry[2])
     end
 
     def parse(raw_action)

@@ -13,22 +13,16 @@ module ToyRobot
     it "parses 'RIGHT'" do
       expect(InputParser.parse('RIGHT')).to eq [:right]
     end
-    
+
     it "parses 'REPORT'" do
       expect(InputParser.parse('REPORT')).to eq [:report]
     end
 
-    it "parses 'REPORT'" do
-      # expect(InputParser.parse('REPORT')).to eq [:report]
-      actions = ['PLACE 4,4,NORTH',
-'PLACE 2,1,EAST',
-'PLACE ,WAT',
-'PLACE ,,',
-'PLACE ,',
-'PLACE']
-      actions.each do |a|
-        InputParser.parse a
-      end
+    it "parses 'Invalid PLACE inputs'" do
+      expect { InputParser.parse 'PLACE ,WAT' }.to raise_error NotValidAction
+      expect { InputParser.parse 'PLACE ,,' }.to raise_error NotValidAction
+      expect { InputParser.parse 'PLACE ,' }.to raise_error NotValidAction
+      expect { InputParser.parse 'PLACE' }.not_to raise_error NotValidAction
     end
   end
 end

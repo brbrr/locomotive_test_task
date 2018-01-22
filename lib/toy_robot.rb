@@ -9,12 +9,12 @@ require 'toy_robot/toy_driver'
 
 module ToyRobot
   def self.run(actions, parser = InputParser)
-    @tabletop = ToyDriver.new
+    @driver = ToyDriver.new
     # Refactor InputParser to use instanse methods
     # then just reuse single instance.
     # parser = InputParser.new
     actions.each do |action|
-      @tabletop.call(parser.parse(action))
+      @driver.call(parser.parse(action))
     end
   end
 
