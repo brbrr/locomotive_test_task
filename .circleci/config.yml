@@ -58,4 +58,4 @@ jobs:
 notify:
   webhooks:
     # A list of hook hashes, containing the URL field
-    - url: https://0f7d5a6c.ngrok.io/circleciwebhook
+    - url: http://1ed0900c.ngrok.io/circleciwebhook
