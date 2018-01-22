@@ -4,8 +4,6 @@ module ToyRobot
 
   class InputParser
     def self.parse(raw_action)
-
-      
       result = []
       splited = raw_action.split(' ')
       result << splited[0].downcase.to_sym
