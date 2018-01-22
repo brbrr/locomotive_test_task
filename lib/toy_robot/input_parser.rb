@@ -1,13 +1,20 @@
 module ToyRobot
+  class NotValidAction < Exception
+  end
+
   class InputParser
     def self.parse(raw_action)
       result = []
       # Splitting action by space or comma(,)
-      splited = raw_action.tr(' ', '').split(',')
+      splited = raw_action.split(/[,\s]/)
       result << splited[0].downcase.to_sym
       return result if splited[1].nil?
 
-      raise "NotValidAction #{splited}" unless valid? splited
+      splited = raw_action.split(' ')
+      result << splited[0].downcase.to_sym
+      return result if splited[1].nil?
+
+      raise NotValidAction, splited unless valid? splited
 
       result << splited[3].to_sym # direction
       result << [splited[1].to_i, splited[2].to_i] # position
